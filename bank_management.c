@@ -1,10 +1,17 @@
 #include <stdio.h>
-#include <postgresql/libpq-fe.h>
-#include <stdlib.h>
+#include <curl/curl.h>
+
+int main() {
+    curl_version_info_data *data = curl_version_info(CURLVERSION_TENTH);
+    if (data) {
+        printf("libcurl version: %s\n", data->version);
+        printf("libcurl SSL version: %s\n", data->ssl_version);
+        printf("libcurl SSL version: %s\n", data->ares);
 
 
-int main(int argc, char *argv[])
-{
-    printf("banka yönetim sistemine hoş geldiniz");
+    } else {
+        fprintf(stderr, "libcurl version information could not be retrieved.\n");
+        return 1;
+    }
+    return 0;
 }
-
